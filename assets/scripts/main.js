@@ -49,7 +49,7 @@ function initializeServiceWorker() {
   // B2. TODO - Listen for the 'load' event on the window object.
     window.addEventListener("load",(event)=>{
       try{
-        navigator.serviceWorker.register('/sw.js').then((registration) => {
+        navigator.serviceWorker.register('./sw.js').then((registration) => {
           console.log('Service worker registration succeeded:', registration);
         });
       }

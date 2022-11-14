@@ -42,14 +42,6 @@ self.addEventListener('fetch', function (event) {
   // B7. TODO - Respond to the event by opening the cache using the name we gave
   //            above (CACHE_NAME)
  
-  // event.respondWith(caches.open(CACHE_NAME));
-  // const responseFromCache = await caches.match(request);
-  // if (responseFromCache) {
-  //   return responseFromCache;
-  // }
-  // const responseFromNetwork = await fetch(request);
-  // putInCache(request, responseFromNetwork.clone());
-  // return responseFromNetwork;
 
   event.respondWith(caches.open(CACHE_NAME).then((cache) => {
     // Go to the cache first
