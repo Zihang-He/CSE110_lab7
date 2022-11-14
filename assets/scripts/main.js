@@ -48,20 +48,14 @@ function initializeServiceWorker() {
   if("serviceWorker" in navigator){
   // B2. TODO - Listen for the 'load' event on the window object.
     window.addEventListener("load",(event)=>{
-      try {
-        const registration = await ServiceWorkerContainer.register("/sw.js", {
-          scope: "/",
+      try{
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+          console.log('Service worker registration succeeded:', registration);
         });
-        if (registration.installing) {
-          console.log("Service worker installing");
-        } else if (registration.waiting) {
-          console.log("Service worker installed");
-        } else if (registration.active) {
-          console.log("Service worker active");
-        }
       }
-      catch (error) {
-        console.error(`Registration failed with ${error}`);
+        
+      catch(error){
+          console.error(`Service worker registration failed: ${error}`);
       }
     });
   // Steps B3-B6 will be *inside* the event listener's function created in B2
@@ -128,7 +122,6 @@ async function getRecipes() {
       try{
         const response = await fetch(RECIPE_URLS[i]);
         const new_r = await response.json();
-        console.log(new_r);
         arr_r.push(new_r);
         if(i==RECIPE_URLS.length-1){
           saveRecipesToStorage(arr_r);
